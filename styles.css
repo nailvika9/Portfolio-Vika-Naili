@@ -479,16 +479,14 @@ p:last-child{ margin-bottom:0; }
   html, body{
     background: var(--paper) !important;
     overflow: visible !important;
+    font-size: 12px !important;
   }
 
-  /* Force scroll-reveal content to be visible no matter what
-     the browser's scroll position was when print was triggered */
   .reveal{
     opacity: 1 !important;
     transform: none !important;
   }
 
-  /* ---- Chrome / nav: none of this is useful on paper ---- */
   .nav,
   .mobile-menu,
   .nav__burger,
@@ -497,16 +495,21 @@ p:last-child{ margin-bottom:0; }
     display: none !important;
   }
 
-  /* ---- Hero: kill the full-viewport-height layout ---- */
+  /* ---- Hero: compact, and keep the photo small enough
+     that it never gets orphaned onto its own page ---- */
   .hero{
     min-height: auto !important;
     height: auto !important;
     display: block !important;
-    padding: 20px 0 30px !important;
+    padding: 14px 0 18px !important;
     overflow: visible !important;
   }
   .hero__stamp{ display: none !important; }
 
+  .hero__title{
+    font-size: 44pt !important;
+    margin-bottom: .15em !important;
+  }
   .hero__title .line--outline{
     -webkit-text-stroke: 0 !important;
     color: var(--ink) !important;
@@ -515,46 +518,47 @@ p:last-child{ margin-bottom:0; }
   .hero__row{
     flex-direction: column;
     align-items: flex-start;
-    gap: 14px;
+    gap: 10px;
+    padding-top: 14px;
   }
   .hero__contact{ text-align: left; }
 
   .hero__portrait{
     position: static !important;
-    width: 160px !important;
-    margin: 20px 0 !important;
+    float: left !important;
+    width: 90px !important;
+    margin: 10px 16px 10px 0 !important;
   }
   .hero__portrait img{ filter: none !important; }
   .hero__blob,
   .tape{ display: none !important; }
 
-  /* ---- About / grids: stack for reliable pagination ---- */
+  /* ---- About / grids: stack, tight spacing ---- */
   .about{
     grid-template-columns: 1fr !important;
-    gap: 36px !important;
-    padding: 30px 0 !important;
+    gap: 20px !important;
+    padding: 16px 0 !important;
   }
+  .about__facts{ margin-top: 16px; padding-top: 12px; }
 
-  /* ---- Tools: the animated ring never "fills" without the
-     scroll-triggered JS, so replace it with a plain readout ---- */
-  .tools{ padding: 30px 0 !important; }
+  /* ---- Tools ---- */
+  .tools{ padding: 16px 0 !important; }
   .tool__ring svg{ display: none !important; }
   .tool__ring{ height: auto !important; width: auto !important; }
-  .tool__pct{
-    position: static !important;
-    display: block !important;
-  }
+  .tool__pct{ position: static !important; display: block !important; }
 
   /* ---- Timeline / work ---- */
-  .work{ padding: 30px 0 !important; }
+  .work{ padding: 16px 0 !important; }
   .timeline{
     grid-template-columns: 1fr !important;
-    gap: 30px !important;
+    gap: 16px !important;
+    margin-top: 14px !important;
   }
-  .tl-item{ page-break-inside: avoid; }
+  .tl-item{ padding: 10px 0 10px 20px !important; page-break-inside: avoid; }
 
-  /* ---- Projects: stack image+text, avoid awkward splits ---- */
-  .projects{ padding: 30px 0 !important; }
+  /* ---- Projects: let content flow naturally instead of
+     forcing the whole block (image + text) to a fresh page ---- */
+  .projects{ padding: 16px 0 !important; }
   .project,
   .project--img-left,
   .project--img-left .project__media,
@@ -564,28 +568,35 @@ p:last-child{ margin-bottom:0; }
   }
   .project{
     display: block !important;
-    page-break-inside: avoid;
-    padding: 22px 0 !important;
+    padding: 14px 0 !important;
+    page-break-inside: auto; /* allow splitting instead of jumping whole block */
   }
-  .project__media{ margin-bottom: 14px; }
+  .project__body{ page-break-inside: avoid; } /* keep heading+text together */
+  .project__media{ margin-bottom: 10px; page-break-inside: avoid; }
   .project__media img{
     transform: none !important;
     box-shadow: none !important;
     border-width: 2px !important;
+    max-height: 220px !important;
+    width: auto !important;
+    max-width: 100% !important;
+    object-fit: cover !important;
+    margin: 0 auto;
   }
+  .project__media--text{ padding: 18px !important; }
   .project__media--alt{
     background: var(--cream-2) !important;
     color: var(--ink) !important;
   }
 
-  /* ---- Org / Beyond Work: force light background, dark text
-     so it's readable even if background graphics are off ---- */
+  /* ---- Org / Beyond Work ---- */
   .org{
     background: var(--paper) !important;
     color: var(--ink) !important;
     background-image: none !important;
-    padding: 30px 0 !important;
+    padding: 16px 0 !important;
   }
+  .org__featured{ margin-bottom: 24px !important; }
   .org__featured h3{ color: var(--ink) !important; }
   .org__featured p{ color: var(--ink-soft) !important; }
   .eyebrow--light{ color: var(--red-dark) !important; }
@@ -599,30 +610,39 @@ p:last-child{ margin-bottom:0; }
     background: var(--paper) !important;
     color: var(--ink) !important;
     border: 1px solid rgba(33,28,22,.15);
+    padding: 12px !important;
   }
 
-  /* ---- Contact: same reasoning — force readable light bg ---- */
+  /* ---- Contact ---- */
   .contact{
     background: var(--paper) !important;
     color: var(--ink) !important;
-    padding: 30px 0 !important;
+    padding: 16px 0 !important;
   }
   .contact::before{ display: none !important; }
-  .contact__title{ color: var(--ink) !important; }
+  .contact__title{
+    color: var(--ink) !important;
+    font-size: 30pt !important;
+    margin-bottom: 16px !important;
+  }
   .contact__title .accent{ color: var(--red) !important; }
-  .contact__actions{ display: none !important; } /* buttons aren't clickable on paper */
+  .contact__actions{ display: none !important; }
   .contact__details{ color: var(--ink-soft) !important; }
 
   /* ---- Footer ---- */
   .footer{
     background: var(--paper) !important;
     border-top: 1px solid rgba(33,28,22,.15);
+    padding: 12px 0 !important;
   }
   .footer a[href="#top"]{ display: none !important; }
 
-  /* ---- Avoid orphaned headings / split cards ---- */
   h1, h2, h3, h4{ page-break-after: avoid; }
   .skill-list li,
   .about__facts > div,
   .tool{ page-break-inside: avoid; }
+
+  /* keep every section's own top padding tight so nothing
+     wastes a near-empty page just from whitespace */
+  section{ padding-top: 10px !important; padding-bottom: 10px !important; }
 }
